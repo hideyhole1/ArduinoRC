@@ -11,18 +11,12 @@ Links for instructions:
 int throttleInput = A5;
 int aileronInput = A4;
 int elevatorInput = A3;
-int rudderInput = A2;
-int gearInput = A1;
-
-//aux1 doesn't work
-int aux1 = A0;
 
 //each value will also have a value from 0 to 255 with the map() function
 int throttle;
 int aileron;
 int elevator;
-int rudder;
-int gear;
+
 
 //pins connected to H-Bridge
 int m1Forward = 5;
@@ -72,9 +66,7 @@ void setup() {
   pinMode(throttleInput, INPUT);
   pinMode(aileronInput, INPUT);
   pinMode(elevatorInput, INPUT);
-  pinMode(rudderInput, INPUT);
-  pinMode(gearInput, INPUT);
-  pinMode(aux1, INPUT);
+  
   
   //setting the outputs for the H-Bridge
   pinMode(m1Forward, OUTPUT);
@@ -96,7 +88,7 @@ void loop() {
   throttle = constrain(throttle, 0, 180);
   aileron = constrain(aileron, 0, 255);
   elevator = constrain(elevator, 0, 255);
-  rudder = constrain(rudder, 0, 180);
+
   
   
   //set speeds for the motors
