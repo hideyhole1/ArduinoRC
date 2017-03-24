@@ -1,9 +1,7 @@
 /*
 (c) Elan Bustos and Miles Fleisher
 
-This is the code for the Arduino in the BB8
-
-Links for instructions:
+This is the code for the Arduino in the Arduino RC.
 
 */
 
@@ -76,7 +74,7 @@ void loop() {
   //mapping the values from 0 to 255(CHANGE VALUES WHEN GET CONTROLER!!!!!)
   throttle = map(pulseIn(throttleInput, HIGH), 1070, 1700, 0, 180);
   steering = map(pulseIn(steeringInput, HIGH), 1100, 1850, 0, 255);
-  
+  if (
   //make sure the values are >= 0 and <= 255
   throttle = constrain(throttle, 0, 180);
   aileron = constrain(steering, 0, 255);
