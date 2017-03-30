@@ -5,6 +5,15 @@ This is the code for the Arduino in the Arduino RC.
 
 */
 
+// The Led Pins
+const int ledPin =  7;
+const int ledPin1 = 8;
+
+
+
+unsigned long previousMillis = 0;        // will store last time LED was up
+const int interval = 1000;           // interval at which to blink (milliseconds)
+
 //pins connected to RX
 int throttleInput = A5;
 int steeringInput = A4;
@@ -54,6 +63,7 @@ void spinMotor2(int fwdback, int pwm) {
 }
 
 void setup() {
+  pinMode(ledPin, OUTPUT);
   // put your setup code here, to run once:
   Serial.begin(9600);
   
@@ -69,12 +79,27 @@ void setup() {
 }
 
 void loop() {
+  unsigned long currentMillis = millis();
+
+  if (currentMillis - previousMillis >= interval) {
+    // save the last time you blinked the LED
+    previousMillis = currentMillis;
+
+    // if the LED is off turn it on and vice-versa:
+    if (digitalRead(ledPin) == LOW) {
+      digitalWrite(ledPin, HIGH);
+      digitalWrite(ledPin1, LOW);
+    } else {
+      digitalWrite(ledPin, LOW);
+      digitalWrite(ledPin1, HIGH);
+    }
+  }
   // put your main code here, to run repeatedly:
   
   //mapping the values from 0 to 255(CHANGE VALUES WHEN GET CONTROLER!!!!!)
   throttle = map(pulseIn(throttleInput, HIGH), 1070, 1700, 0, 180);
   steering = map(pulseIn(steeringInput, HIGH), 1100, 1850, 0, 255);
-  if (
+  
   //make sure the values are >= 0 and <= 255
   throttle = constrain(throttle, 0, 180);
   aileron = constrain(steering, 0, 255);
