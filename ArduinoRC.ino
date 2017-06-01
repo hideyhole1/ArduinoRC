@@ -1,10 +1,3 @@
-/*
-(c) Elan Bustos and Miles Fleisher
-
-This is the code for the Arduino in the Arduino RC.
-
-*/
-
 // The Led Pins
 const int ledPin =  7;
 const int ledPin1 = 8;
@@ -15,8 +8,8 @@ unsigned long previousMillis = 0;        // will store last time LED was up
 const int interval = 1000;           // interval at which to blink (milliseconds)
 
 //pins connected to RX
-int throttleInput = A5;
-int steeringInput = A4;
+int throttleInput = A4;
+int steeringInput = A5;
 
 //each value will also have a value from 0 to 255 with the map() function
 int throttle;
@@ -81,6 +74,8 @@ void setup() {
 void loop() {
   unsigned long currentMillis = millis();
 
+  //Serial.println("Steering: " + String(pulseIn(steeringInput, HIGH)));
+  
   if (currentMillis - previousMillis >= interval) {
     // save the last time you blinked the LED
     previousMillis = currentMillis;
@@ -97,12 +92,12 @@ void loop() {
   // put your main code here, to run repeatedly:
   
   //mapping the values from 0 to 255(CHANGE VALUES WHEN GET CONTROLER!!!!!)
-  throttle = map(pulseIn(throttleInput, HIGH), 1070, 1700, 0, 180);
-  steering = map(pulseIn(steeringInput, HIGH), 1100, 1850, 0, 255);
+  throttle = map(pulseIn(throttleInput, HIGH), 2040, 990, 0, 255);
+  steering = map(pulseIn(steeringInput, HIGH), 1010, 1975, 0, 255);
   
   //make sure the values are >= 0 and <= 255
-  throttle = constrain(throttle, 0, 180);
-  aileron = constrain(steering, 0, 255);
+  throttle = constrain(throttle, 0, 255);
+  steering = constrain(steering, 0, 255);
   
   //set speeds for the motors
   if(throttle > 135) {
