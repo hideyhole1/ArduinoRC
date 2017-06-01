@@ -74,7 +74,7 @@ void setup() {
 void loop() {
   unsigned long currentMillis = millis();
 
-  //Serial.println("Steering: " + String(pulseIn(steeringInput, HIGH)));
+  Serial.println("Throttle: " + String(pulseIn(throttleInput, HIGH)));
   
   if (currentMillis - previousMillis >= interval) {
     // save the last time you blinked the LED
@@ -92,7 +92,7 @@ void loop() {
   // put your main code here, to run repeatedly:
   
   //mapping the values from 0 to 255(CHANGE VALUES WHEN GET CONTROLER!!!!!)
-  throttle = map(pulseIn(throttleInput, HIGH), 2040, 990, 0, 255);
+  throttle = map(pulseIn(throttleInput, HIGH), 990, 2000, 0, 255);
   steering = map(pulseIn(steeringInput, HIGH), 1010, 1975, 0, 255);
   
   //make sure the values are >= 0 and <= 255
